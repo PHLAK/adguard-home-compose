@@ -8,22 +8,7 @@ services:
       PGID: ${HOST_GROUP_ID:?HOST_GROUP_ID is required}
       WATCHTOWER_SCOPE: adguard-home-compose
       TZ: ${TZ:-UTC}
-    # network_mode: host
-    ports:
-      - "5353:53/tcp"
-      - "5353:53/udp"
-      - "67:67/udp"
-      - "68:68/udp"
-      - "8080:80/tcp"
-      - "443:443/tcp"
-      - "443:443/udp"
-      - "3000:3000/tcp"
-      - "853:853/tcp"
-      - "784:784/udp"
-      - "853:853/udp"
-      - "8853:8853/udp"
-      - "5443:5443/tcp"
-      - "5443:5443/udp"
+    network_mode: host
     volumes:
       - adguard-home-config:/opt/adguardhome/conf
       - adguard-home-data:/opt/adguardhome/work
