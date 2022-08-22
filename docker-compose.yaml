@@ -6,26 +6,26 @@ services:
     environment:
       PUID: ${HOST_USER_ID:?HOST_USER_ID is required}
       PGID: ${HOST_GROUP_ID:?HOST_GROUP_ID is required}
-      WATCHTOWER_SCOPE: adguard-home-compose
+      WATCHTOWER_SCOPE: ${COMPOSE_PROJECT_NAME}
       TZ: ${TZ:-UTC}
     network_mode: host
     volumes:
       - adguard-home-config:/opt/adguardhome/conf
       - adguard-home-data:/opt/adguardhome/work
     labels:
-      com.centurylinklabs.watchtower.scope: adguard-home-compose
+      com.centurylinklabs.watchtower.scope: ${COMPOSE_PROJECT_NAME}
     restart: unless-stopped
 
   watchtower:
     image: containrrr/watchtower
     env_file: config/watchtower.env
     environment:
-      WATCHTOWER_SCOPE: adguard-home-compose
+      WATCHTOWER_SCOPE: ${COMPOSE_PROJECT_NAME}
       TZ: ${TZ:-UTC}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     labels:
-      com.centurylinklabs.watchtower.scope: adguard-home-compose
+      com.centurylinklabs.watchtower.scope: ${COMPOSE_PROJECT_NAME}
     restart: unless-stopped
 
 volumes:
